@@ -3,6 +3,8 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 from suppliers.models import Supplier
 from django.urls import reverse_lazy
 from suppliers.forms import SupplierForm
+from rest_framework import generics
+from .serializers import SupplierSerializer
 
 # Create your views here.
 
@@ -50,3 +52,13 @@ class SupplierDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView
     template_name = 'supplier_delete.html'
     success_url = reverse_lazy('supplier_list')
     permission_required = 'suppliers.delete_supplier'
+
+
+class SupplierCreateListAPIView(generics.ListCreateAPIView):
+    queryset = Supplier.objects.all()
+    serializer_class = SupplierSerializer
+
+
+class SupplierRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Supplier.objects.all
+    serializer_class = SupplierSerializer

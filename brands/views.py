@@ -3,6 +3,8 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 from brands.models import Brand
 from django.urls import reverse_lazy
 from brands.forms import BrandForm
+from rest_framework import generics
+from .serializers import BrandSerializer
 
 # Create your views here.
 
@@ -50,3 +52,13 @@ class BrandDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     template_name = 'brand_delete.html'
     success_url = reverse_lazy('brand_list')
     permission_required = 'brands.delete_brand'
+
+
+class BrandCreateListAPIView(generics.ListCreateAPIView):
+    queryset = Brand.objects.all()
+    serializer_class = BrandSerializer
+
+
+class BrandRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Brand.objects.all()
+    serializer_class = BrandSerializer

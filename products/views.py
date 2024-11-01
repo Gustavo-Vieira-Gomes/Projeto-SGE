@@ -6,6 +6,8 @@ from products.forms import ProductForm
 from categories.models import Category
 from brands.models import Brand
 from app.metrics import get_product_metrics
+from rest_framework import generics
+from .serializers import ProductSerializer
 
 # Create your views here.
 
@@ -72,3 +74,13 @@ class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView)
     template_name = 'product_delete.html'
     success_url = reverse_lazy('product_list')
     permission_required = 'products.delete_product'
+
+
+class ProductCreateListAPIView(generics.ListCreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+
+class ProductRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Product.objects.all
+    serializer_class = ProductSerializer

@@ -4,6 +4,8 @@ from outflows.models import Outflow
 from django.urls import reverse_lazy
 from outflows.forms import OutflowForm
 from app.metrics import get_sales_metrics
+from rest_framework import generics
+from .serializers import OutflowSerializer
 
 # Create your views here.
 
@@ -42,3 +44,13 @@ class OutflowDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView)
     model = Outflow
     template_name= 'outflow_detail.html'
     permission_required = 'outflows.delete_outflow'
+
+
+class OutflowCreateListAPIView(generics.ListCreateAPIView):
+    queryset = Outflow.objects.all()
+    serializer_class = OutflowSerializer
+
+
+class OutflowRetrieveAPIView(generics.RetrieveAPIView):
+    queryset = Outflow.objects.all()
+    serializer_class = OutflowSerializer
