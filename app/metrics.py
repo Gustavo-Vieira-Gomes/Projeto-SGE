@@ -26,16 +26,16 @@ def get_sales_metrics():
     outflows = Outflow.objects.all()
     total_sales = outflows.count()
     total_products_sold = outflows.aggregate(total_products_sold=Sum('quantity'))['total_products_sold'] or 0
-    total_sales_value = sum (outflow.quantity * outflow.product.selling_price for outflow in outflows)
-    _total_sales_cost = sum (outflow.quantity * outflow.product.cost_price for outflow in outflows)
-    
+    total_sales_value = sum(outflow.quantity * outflow.product.selling_price for outflow in outflows)
+    _total_sales_cost = sum(outflow.quantity * outflow.product.cost_price for outflow in outflows)
+
     total_sales_profit = total_sales_value - _total_sales_cost
 
     return dict(
-        total_sales = total_sales,
-        total_products_sold = total_products_sold,
-        total_sales_value = number_format(total_sales_value, decimal_pos=2, force_grouping=True),
-        total_sales_profit = number_format(total_sales_profit, decimal_pos=2, force_grouping=True),
+        total_sales=total_sales,
+        total_products_sold=total_products_sold,
+        total_sales_value=number_format(total_sales_value, decimal_pos=2, force_grouping=True),
+        total_sales_profit=number_format(total_sales_profit, decimal_pos=2, force_grouping=True),
     )
 
 

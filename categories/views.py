@@ -4,9 +4,10 @@ from categories.models import Category
 from django.urls import reverse_lazy
 from categories.forms import CategoryForm
 from rest_framework import generics
-from .serializers import  CategorySerializer
+from .serializers import CategorySerializer
 
 # Create your views here.
+
 
 class CategoryListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Category
@@ -23,7 +24,7 @@ class CategoryListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
             queryset = queryset.filter(name__icontains=name)
 
         return queryset
-    
+
 
 class CategoryCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Category
@@ -35,7 +36,7 @@ class CategoryCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView
 
 class CategoryDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Category
-    template_name= 'category_detail.html'
+    template_name = 'category_detail.html'
     permission_required = 'categories.view_category'
 
 

@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, DetailView
 from outflows.models import Outflow
 from django.urls import reverse_lazy
 from outflows.forms import OutflowForm
@@ -8,6 +8,7 @@ from rest_framework import generics
 from .serializers import OutflowSerializer
 
 # Create your views here.
+
 
 class OutflowListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Outflow
@@ -24,13 +25,13 @@ class OutflowListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
             queryset = queryset.filter(product__title__icontains=product)
 
         return queryset
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['sales_metrics'] = get_sales_metrics()
 
         return context
-    
+
 
 class OutflowCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Outflow
@@ -42,7 +43,7 @@ class OutflowCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView)
 
 class OutflowDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Outflow
-    template_name= 'outflow_detail.html'
+    template_name = 'outflow_detail.html'
     permission_required = 'outflows.delete_outflow'
 
 

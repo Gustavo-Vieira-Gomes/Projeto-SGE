@@ -4,6 +4,7 @@ from brands.models import Brand
 
 # Create your models here.
 
+
 class Product(models.Model):
     title = models.CharField(max_length=500)
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='products')

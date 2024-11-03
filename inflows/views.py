@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, DetailView
 from inflows.models import Inflow
 from django.urls import reverse_lazy
 from inflows.forms import InflowForm
@@ -7,6 +7,7 @@ from rest_framework import generics
 from .serializers import InflowSerializer
 
 # Create your views here.
+
 
 class InflowListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Inflow
@@ -23,7 +24,7 @@ class InflowListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
             queryset = queryset.filter(product__title__icontains=product)
 
         return queryset
-    
+
 
 class InflowCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Inflow

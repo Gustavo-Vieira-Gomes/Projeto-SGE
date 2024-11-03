@@ -4,6 +4,7 @@ from products.models import Product
 
 # Create your models here.
 
+
 class Inflow(models.Model):
     supplier = models.ForeignKey(Supplier, on_delete=models.PROTECT, related_name='inflows')
     product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name='inflows')
@@ -16,4 +17,4 @@ class Inflow(models.Model):
         ordering = ['-created_at']
 
     def __str__(self) -> str:
-        return str(self.product)    
+        return str(self.product)

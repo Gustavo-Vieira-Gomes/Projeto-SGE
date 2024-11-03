@@ -8,6 +8,7 @@ from .serializers import BrandSerializer
 
 # Create your views here.
 
+
 class BrandListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Brand
     template_name = 'brand_list.html'
@@ -23,7 +24,7 @@ class BrandListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
             queryset = queryset.filter(name__icontains=name)
 
         return queryset
-    
+
 
 class BrandCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Brand
@@ -35,7 +36,7 @@ class BrandCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
 
 class BrandDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Brand
-    template_name= 'brand_detail.html'
+    template_name = 'brand_detail.html'
     permission_required = 'brands.view_brand'
 
 

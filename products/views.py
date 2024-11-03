@@ -11,6 +11,7 @@ from .serializers import ProductSerializer
 
 # Create your views here.
 
+
 class ProductListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Product
     template_name = 'product_list.html'
@@ -38,14 +39,14 @@ class ProductListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
             queryset = queryset.filter(serie_number__icontains=serie_number)
 
         return queryset
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context['categories'] = Category.objects.all()
         context['brands'] = Brand.objects.all()
         context['product_metrics'] = get_product_metrics()
         return context
-    
+
 
 class ProductCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Product
@@ -57,7 +58,7 @@ class ProductCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView)
 
 class ProductDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Product
-    template_name= 'product_detail.html'
+    template_name = 'product_detail.html'
     permission_required = 'products.view_product'
 
 

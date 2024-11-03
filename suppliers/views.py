@@ -8,6 +8,7 @@ from .serializers import SupplierSerializer
 
 # Create your views here.
 
+
 class SupplierListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Supplier
     template_name = 'supplier_list.html'
@@ -23,7 +24,7 @@ class SupplierListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
             queryset = queryset.filter(name__icontains=name)
 
         return queryset
-    
+
 
 class SupplierCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Supplier
@@ -35,7 +36,7 @@ class SupplierCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView
 
 class SupplierDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Supplier
-    template_name= 'supplier_detail.html'
+    template_name = 'supplier_detail.html'
     permission_required = 'suppliers.view_supplier'
 
 
